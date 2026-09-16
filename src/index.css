@@ -1,0 +1,292 @@
+@import "tailwindcss";
+
+:root {
+  --primary-color: #89BF55;
+  --secondary-color: rgba(255, 255, 255, 0.5);
+  --third-color: #ffffff;
+  --fourth-color: #bac964;
+  --dark-bg: #222222;
+  --card-bg: #333333;
+}
+
+body {
+  background-color: #222222;
+  color: #ffffff;
+  scroll-behavior: smooth;
+  font-family: 'Plus Jakarta Sans', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+  overflow-x: hidden;
+}
+
+code, kbd, samp, pre {
+  font-family: 'JetBrains Mono', ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, monospace;
+}
+
+/* ==================== Loading Spinner ==================== */
+.portfolio-loader {
+  transform: rotateZ(45deg);
+  perspective: 1000px;
+  border-radius: 50%;
+  width: 75px;
+  height: 75px;
+  color: #89BF55;
+  position: relative;
+}
+
+.portfolio-loader:before,
+.portfolio-loader:after {
+  content: "";
+  display: block;
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: inherit;
+  height: inherit;
+  border-radius: 50%;
+  transform: rotateX(70deg);
+  animation: spin 1s linear infinite;
+}
+
+.portfolio-loader:after {
+  color: #FF3D00;
+  transform: rotateY(70deg);
+  animation-delay: 0.4s;
+}
+
+@keyframes spin {
+  0%, 100% {
+    box-shadow: 0.2em 0px 0 0px currentColor;
+  }
+  12% {
+    box-shadow: 0.2em 0.2em 0 0 currentColor;
+  }
+  25% {
+    box-shadow: 0 0.2em 0 0px currentColor;
+  }
+  37% {
+    box-shadow: -0.2em 0.2em 0 0 currentColor;
+  }
+  50% {
+    box-shadow: -0.2em 0 0 0 currentColor;
+  }
+  62% {
+    box-shadow: -0.2em -0.2em 0 0 currentColor;
+  }
+  75% {
+    box-shadow: 0px -0.2em 0 0 currentColor;
+  }
+  87% {
+    box-shadow: 0.2em -0.2em 0 0 currentColor;
+  }
+}
+
+/* ========================= Home Section & Parallax ======================= */
+.bg-homea {
+  background-position: center 20%;
+  background-size: cover;
+  background-attachment: fixed;
+  background-repeat: no-repeat;
+  height: 100vh;
+  min-height: 650px;
+  position: relative;
+  width: 100%;
+}
+
+.bg-homea .bg-layer {
+  position: absolute;
+  inset: 0;
+  background-color: rgba(0, 0, 0, 0.46);
+  width: 100%;
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+}
+
+.contant-home,
+.bg-homea .contant-home {
+  text-align: center;
+  user-select: none;
+}
+
+.contant-home h2,
+.bg-homea .contant-home h2 {
+  color: #ffffff;
+  font-size: clamp(2.6rem, 5.5vw, 4.8rem);
+  font-weight: 200;
+  line-height: 1.15;
+  letter-spacing: 0.02em;
+}
+
+.contant-home h1,
+.bg-homea .contant-home h1 {
+  color: #ffffff;
+  font-size: clamp(3.2rem, 7.5vw, 5.6rem);
+  font-weight: 700;
+  line-height: 1.1;
+  letter-spacing: -0.01em;
+  margin-top: 0.35rem;
+}
+
+.contant-home h4,
+.bg-homea .contant-home h4 {
+  margin-top: 1.25rem;
+  color: rgba(255, 255, 255, 0.55);
+  font-size: clamp(1rem, 2.2vw, 1.55rem);
+  font-weight: 200;
+  letter-spacing: 0.22em;
+  text-transform: uppercase;
+}
+
+/* ==================== 3D Cube Animation ==================== */
+.cube-container {
+  perspective: 1000px;
+  width: 100px;
+  height: 100px;
+}
+
+.cube-box {
+  width: 90px;
+  height: 90px;
+  position: relative;
+  transform-style: preserve-3d;
+  animation: cubeRotate 24s infinite linear;
+}
+
+.cube-box:hover {
+  animation-play-state: paused;
+}
+
+.cube-box-slow {
+  animation-duration: 30s;
+  animation-delay: -6s;
+}
+
+.cube-box-fast {
+  animation-duration: 21s;
+  animation-delay: -12s;
+}
+
+.cube-box-reverse {
+  animation: cubeRotateReverse 26s infinite linear;
+  animation-delay: -18s;
+}
+
+@keyframes cubeRotateReverse {
+  0%   { transform: rotateX(360deg) rotateY(360deg); }
+  25%  { transform: rotateX(225deg) rotateY(270deg); }
+  50%  { transform: rotateX(180deg) rotateY(180deg); }
+  75%  { transform: rotateX(45deg) rotateY(90deg); }
+  100% { transform: rotateX(0deg) rotateY(0deg); }
+}
+
+.cube-face {
+  width: 90px;
+  height: 90px;
+  position: absolute;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  background: radial-gradient(rgba(186, 201, 100, 0.25), rgba(51, 51, 51, 0.95));
+  border: 2px solid #bac964;
+  box-shadow: 0 0 15px rgba(186, 201, 100, 0.2);
+  border-radius: 8px;
+  backface-visibility: visible;
+}
+
+.cube-face-front  { transform: translateZ(45px); }
+.cube-face-back   { transform: rotateY(180deg) translateZ(45px); }
+.cube-face-left   { transform: rotateY(-90deg) translateZ(45px); }
+.cube-face-right  { transform: rotateY(90deg) translateZ(45px); }
+.cube-face-top    { transform: rotateX(90deg) translateZ(45px); }
+.cube-face-bottom { transform: rotateX(-90deg) translateZ(45px); }
+
+@keyframes cubeRotate {
+  0%   { transform: rotateX(0deg) rotateY(0deg); }
+  25%  { transform: rotateX(45deg) rotateY(90deg); }
+  50%  { transform: rotateX(180deg) rotateY(180deg); }
+  75%  { transform: rotateX(225deg) rotateY(270deg); }
+  100% { transform: rotateX(360deg) rotateY(360deg); }
+}
+
+/* ==================== Signature Hover Effects ==================== */
+.item-portfolio-card {
+  background-color: #333333;
+  border-radius: 10px;
+  position: relative;
+  overflow: hidden;
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+.item-portfolio-card:hover {
+  transform: translateY(-4px);
+  box-shadow: 0 10px 25px -5px rgba(0, 0, 0, 0.5);
+}
+
+.item-portfolio-card .screen-hover {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 0%;
+  background-color: rgba(34, 34, 34, 0.88);
+  backdrop-filter: blur(2px);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 16px;
+  transition: height 0.35s cubic-bezier(0.4, 0, 0.2, 1);
+  overflow: hidden;
+  z-index: 10;
+}
+
+.item-portfolio-card:hover .screen-hover {
+  height: 100%;
+}
+
+/* ==================== Signature Asymmetrical Borders ==================== */
+.services-card-radius {
+  border-radius: 15px 0;
+}
+
+.contact-container-radius {
+  border-radius: 50px 0;
+}
+
+@media (max-width: 640px) {
+  .contact-container-radius {
+    border-radius: 24px 0;
+  }
+}
+
+/* ==================== Footer Social Icons ==================== */
+.footer-social-icon {
+  width: 54px;
+  height: 54px;
+  background-color: #333333;
+  border-radius: 50%;
+  border-top: 3.5px solid #89BF55;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: all 0.3s ease;
+}
+
+.footer-social-icon:hover {
+  transform: translateY(-4px);
+  border-top-color: #bac964;
+  box-shadow: 0 4px 15px rgba(137, 191, 85, 0.3);
+}
+
+.footer-social-icon i,
+.footer-social-icon svg {
+  color: #bac964;
+  transition: transform 0.3s ease;
+}
+
+.footer-social-icon:hover svg {
+  transform: scale(1.2) rotate(8deg);
+  color: #89BF55;
+}
+
